@@ -4,7 +4,6 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Protocols;
@@ -14,19 +13,15 @@ using Microsoft.IdentityModel.Tokens;
 public class TokenValidator
 {
     private IConfiguration configuration;
-    private ExecutionContext context;
     private ILogger log;
     private string token;
-
     private const string scopeType = @"http://schemas.microsoft.com/identity/claims/scope";
-
     public string Token {get {return token;} private set{token = value;}}
     
-    public TokenValidator(IConfiguration config, ILogger logger, ExecutionContext cxt)
+    public TokenValidator(IConfiguration config, ILogger logger)
     {
         configuration = config;
         log = logger;
-        context = cxt;
     }
    
     public void GetJwtFromHeader(HttpRequest req)

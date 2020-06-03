@@ -31,7 +31,7 @@ public class UpdateMeasurements
         ILogger log)
     {
         var config = GetAzureADConfiguration(context);
-        var tokenValidator = new TokenValidator(config, log, context);
+        var tokenValidator = new TokenValidator(config, log);
         var claimsPrincipal = await tokenValidator.ValidateTokenAsync(req, audience);
 
         if(!tokenValidator.HasRightRolesAndScope(claimsPrincipal, scopeName, roles))

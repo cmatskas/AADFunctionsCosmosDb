@@ -31,7 +31,7 @@ public static class GetVolcano
         ILogger log)
     {
         configuration = GetAzureADConfiguration(context);
-        tokenValidator = new TokenValidator(configuration, log, context);
+        tokenValidator = new TokenValidator(configuration, log);
         var claimsPrincipal = await tokenValidator.ValidateTokenAsync(req, audience);
 
         if(!tokenValidator.HasRightRolesAndScope(claimsPrincipal, scopeName, roles))
